@@ -3,34 +3,33 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-// Asumsi: Anda memiliki fungsi untuk memvalidasi token dari cookies
 import { isAuthenticated } from '@/lib/auth'; 
 
 export default function DashboardLayout({ children }) {
-    // Di lingkungan server (Vercel/Node.js), kita perlu mengambil headers
     const headersList = headers();
-    
-    // Cek apakah Admin sudah login menggunakan token di cookie
-    // Gunakan isAuthenticated dari '/lib/auth' Anda
     const isAdminAuthenticated = isAuthenticated({ headers: headersList });
 
-    // Jika Admin belum terautentikasi, alihkan ke halaman login
     if (!isAdminAuthenticated) {
-        // Karena ini komponen Server, kita gunakan redirect dari next/navigation
         redirect('/dashboard/login'); 
     }
 
-    // Tampilkan konten halaman dashboard jika sudah terautentikasi
     return (
-        <div className="dashboard-container">
-            {/* Di sini Anda bisa menambahkan sidebar atau navigasi dashboard yang spesifik */}
-            <header style={{ padding: '15px', borderBottom: '1px solid #ddd', backgroundColor: '#fff' }}>
-                <p style={{ fontWeight: 'bold' }}>Dashboard Admin</p>
-            </header>
+        <div className="dashboard-wrapper" style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f4f7f9' }}>
             
-            <main style={{ padding: '20px' }}>
+            {/* Minimalis Sidebar/Header Admin */}
+            <nav style={{ width: '250px', backgroundColor: '#2c3e50', color: 'white', padding: '20px', flexShrink: 0 }}>
+                <h3 style={{ marginBottom: '30px', color: '#1abc9c' }}>Admin Panel</h3>
+                <ul style={{ listStyle: 'none', padding: 0 }}>
+                    <li style={{ marginBottom: '10px' }}><a href="/dashboard" style={{ color: 'white', textDecoration: 'none' }}>Home</a></li>
+                    <li style={{ marginBottom: '10px' }}><a href="/dashboard/links" style={{ color: 'white', textDecoration: 'none' }}>Manajemen Link</a></li>
+                    <li style={{ marginBottom: '10px' }}><a href="/dashboard/settings" style={{ color: 'white', textDecoration: 'none' }}>Pengaturan</a></li>
+                </ul>
+            </nav>
+            
+            {/* Konten Halaman yang diminta (dashboard/page.js, dll.) */}
+            <main style={{ flexGrow: 1, padding: '30px' }}>
                 {children}
             </main>
         </div>
     );
-      }
+                                                  }
