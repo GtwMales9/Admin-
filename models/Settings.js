@@ -11,16 +11,16 @@ const SettingsSchema = new mongoose.Schema({
         type: String,
         default: 'upload',
     },
-    // --- BARU: Judul yang tampil di halaman demo ---
+    // --- FITUR JUDUL GLOBAL ---
     globalWebsiteTitle: {
         type: String,
-        default: 'Portofolio Profesional', // Nilai default
+        default: 'Portofolio Profesional', 
     },
-    globalDemoTitle: { // Judul Hero Section
+    globalDemoTitle: { 
         type: String,
         default: 'Fahil Gimang',
     },
-    // -------------------------------------------------------
+    // -------------------------
 }, { timestamps: true });
 
 const SettingsModel = mongoose.models.Settings || mongoose.model('Settings', SettingsSchema);
