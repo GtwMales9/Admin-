@@ -8,24 +8,24 @@ const LinkSchema = new mongoose.Schema({
     required: true, 
     unique: true 
   },
-  telegramBotToken: {
+  telegramBotToken: { 
     type: String,
     required: true,
   },
-  telegramChatId: {
+  telegramChatId: { 
     type: String,
     required: true,
   },
-  websiteName: { // Untuk nama website spesifik per link (jika ada)
+  websiteName: { 
     type: String,
     required: false,
   },
-  // --- BARU: Tanggal Kadaluarsa Link (Diatur Admin) ---
+  // --- FITUR KADALUARSA ---
   expiresAt: {
     type: Date,
     required: true, 
   },
-  // --------------------------------------------------------
+  // -------------------------
 }, { timestamps: true });
 
 const Link = mongoose.models.Link || mongoose.model('Link', LinkSchema);
