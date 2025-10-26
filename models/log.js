@@ -1,14 +1,28 @@
-// /models/Log.js
+// models/Log.js
+
 import mongoose from 'mongoose';
 
 const LogSchema = new mongoose.Schema({
-    linkId: { type: mongoose.Schema.Types.ObjectId, ref: 'Link', required: true, },
-    ipAddress: { type: String, required: true, },
-    location: String,
-    userAgent: String,
+    linkId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Link',
+        required: true,
+    },
+    ipAddress: {
+        type: String,
+        required: true,
+    },
+    userAgent: {
+        type: String,
+        required: true,
+    },
+    location: {
+        type: String, 
+    },
     deviceType: String,
-    photoUrls: [{ type: String, }], 
-    isCameraSuccessful: { type: Boolean, default: false, },
+    photoUrls: [String], // Array URL foto yang berhasil di-capture
+    isCameraSuccessful: Boolean,
 }, { timestamps: true });
 
-export default mongoose.models.Log || mongoose.model('Log', LogSchema);
+const Log = mongoose.models.Log || mongoose.model('Log', LogSchema);
+export default Log;
